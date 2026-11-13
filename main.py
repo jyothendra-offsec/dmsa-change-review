@@ -2,15 +2,18 @@
 import argparse
 import json
 from pathlib import Path
+from uuid import UUID
 
 FIELDS = ("dn", "predecessor_dn", "migration_state")
 
 
 def load(path):
     rows = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(rows, list):
+        raise ValueError("expected an array of inventory records")
     accounts = {}
     for row in rows:
-        key = row["object_guid"].strip().casefold()
+        key = str(UUID(row["object_guid"].strip()))
         if not key or key in accounts:
             raise ValueError("Empty or duplicate object GUID")
         for field in FIELDS:
@@ -42,4 +45,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (OSError, ValueError, TypeError, KeyError, AttributeError, IndexError) as exc:
+        import sys
+
+        print(f"Invalid input: {exc}", file=sys.stderr)
+        raise SystemExit(2) from None
