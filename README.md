@@ -36,3 +36,7 @@ Capture equivalent directory scopes and keep both snapshots. An absent object is
 ```sh
 python3 -m unittest discover -s tests -v
 ```
+
+## Review workflow
+
+Review unexpected predecessor changes against approved migration records. Compare missing objects against inventory coverage before investigating deletion.
