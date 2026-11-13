@@ -40,3 +40,7 @@ python3 -m unittest discover -s tests -v
 ## Review workflow
 
 Review unexpected predecessor changes against approved migration records. Compare missing objects against inventory coverage before investigating deletion.
+
+## Usage terms
+
+Original material in this revision requires the owner's written permission for modification or redistribution. Earlier MIT releases and third-party licenses retain their terms. See [LICENSE](LICENSE).
